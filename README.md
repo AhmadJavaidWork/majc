@@ -1,0 +1,2 @@
+# majc
+Compiler for maj
