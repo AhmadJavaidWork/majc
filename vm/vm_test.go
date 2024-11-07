@@ -27,6 +27,7 @@ func TestIntegerArithmetic(t *testing.T) {
 
 func runVmTests(t *testing.T, tests []vmTestCase) {
 	t.Helper()
+
 	for _, tt := range tests {
 		program := parse(tt.input)
 		comp := compiler.New()
@@ -39,7 +40,7 @@ func runVmTests(t *testing.T, tests []vmTestCase) {
 		if err != nil {
 			t.Fatalf("vm error: %s", err)
 		}
-		stackElem := vm.StackTop()
+		stackElem := vm.LastPoppedStackElem()
 		testExpectedObject(t, tt.expected, stackElem)
 	}
 }
