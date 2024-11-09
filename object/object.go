@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/ahmadjavaidwork/majc/ast"
+	"github.com/ahmadjavaidwork/majc/code"
 )
 
 type ObjectType string
@@ -25,6 +26,8 @@ const (
 
 	FUNCTION_OBJ = "FUNCTION"
 	BUILTIN_OBJ  = "BUILTIN"
+
+	COMPILED_FUNCTION_OBJ = "COMPILED_FUNCTION_OBJ"
 )
 
 type Object interface {
@@ -177,4 +180,13 @@ func (h *Hash) Inspect() string {
 	out.WriteString("}")
 
 	return out.String()
+}
+
+type CompiledFunction struct {
+	Instructions code.Instructions
+}
+
+func (cf *CompiledFunction) Type() ObjectType { return COMPILED_FUNCTION_OBJ }
+func (cf *CompiledFunction) Inspect() string {
+	return fmt.Sprintf("CompiledFunction[%p]", cf)
 }
