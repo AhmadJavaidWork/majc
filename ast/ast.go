@@ -2,6 +2,7 @@ package ast
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
 
 	"github.com/ahmadjavaidwork/majc/token"
@@ -210,6 +211,7 @@ func (bs *BlockStatement) String() string {
 
 type FunctionLiteral struct {
 	Token      token.Token
+	Name       string
 	Parameters []*Identifier
 	Body       *BlockStatement
 }
@@ -220,6 +222,9 @@ func (fl *FunctionLiteral) String() string {
 	var out bytes.Buffer
 
 	out.WriteString(fl.TokenLiteral())
+	if fl.Name != "" {
+		out.WriteString(fmt.Sprintf("<%s>", fl.Name))
+	}
 	out.WriteString("(")
 
 	params := []string{}
